@@ -31,28 +31,28 @@ public class Board {
 			String line = null;
 			switch (a) {
 			case 0:
-				line = board[0][0] + board[0][1] + board[0][2];
+				line = Position[0][0] + Position[0][1] + Position[0][2];
 				break;
 			case 1:
-				line = board[1][0] + board[1][1] + board[1][2];
+				line = Position[1][0] + Position[1][1] + Position[1][2];
 				break;
 			case 2:
-				line = board[2][0] + board[2][1] + board[2][2];
+				line = Position[2][0] + Position[2][1] + Position[2][2];
 				break;
 			case 3:
-				line = board[0][0] + board[1][0] + board[2][0];
+				line = Position[0][0] + Position[1][0] + Position[2][0];
 				break;
 			case 4:
-				line = board[0][1] + board[1][1] + board[2][1];
+				line = Position[0][1] + Position[1][1] + Position[2][1];
 				break;
 			case 5:
-				line = board[0][2] + board[1][2] + board[2][2];
+				line = Position[0][2] + Position[1][2] + Position[2][2];
 				break;
 			case 6:
-				line = board[0][0] + board[1][1] + board[2][2];
+				line = Position[0][0] + Position[1][1] + Position[2][2];
 				break;
 			case 7:
-				line = board[0][2] + board[1][1] + board[2][0];
+				line = Position[0][2] + Position[1][1] + Position[2][0];
 				break;
 			}
 			if (line.equals("XXX")) {
