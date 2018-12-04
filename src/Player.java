@@ -8,8 +8,6 @@ public class Player {
 	private Map<Integer, String> userTurn;
 	
 	
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -25,5 +23,6 @@ public class Player {
 	
 
 
+	
 	
 }
