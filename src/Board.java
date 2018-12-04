@@ -1,7 +1,7 @@
 
 public class Board {
 	
-	private int[][] Position = new int[3][3];
+	private String[][] Position = new String[3][3];
 
 
 }
