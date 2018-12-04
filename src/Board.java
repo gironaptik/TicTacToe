@@ -1,27 +1,62 @@
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Board {
 
 	private int currentRow, currentCol;
 	private String[][] Position = new String[3][3];
+	private Controller c;
+	private String currentSign="X";
+	private String result;
 
-	public Board(String[][] position) {
+	public Board(String[][] position, Controller c) {
 		super();
 		Position = position;
+		this.c = c;
 	}
-
+	
 	public String[][] getPosition() {
 		return Position;
 	}
+	
+
+	public Controller getC() {
+		return c;
+	}
+
 
 	public void setPosition(String[][] position) {
 		Position = position;
 	}
-
-	public void checkAndPlayMove(int choice) {
-		convert(choice);
-
+	
+	public void setC(Controller c) {
+		this.c = c;
 	}
+	
+	
+	public void checkAndPlayMove() {
+		int choice;
+		
+		Scanner s=new Scanner(System.in);
+		choice=s.nextInt();
+		convert(choice);
+		
+		while(Position[currentRow][currentCol].equals("X") || 
+			Position[currentRow][currentCol].equals("O")){
+				
+			System.out.println("Please enter new Position: ");
+			choice=s.nextInt();
+			convert(choice);
+		}
+		
+			Position[currentRow][currentCol]=currentSign;
+			result=checkResult();
+			if(result==null)
+				this.currentSign=c.swapPlayer().getSign();
+			else
+				System.out.println(result);
+		}
 
 	private void convert(int choice) {
 		switch (choice) {
@@ -67,9 +102,9 @@ public class Board {
 
 	public String checkResult() {
 		String result = null;
-		for (int a = 0; a < 8; a++) {
+		for (int i = 0; i < 8; i++) {
 			String line = null;
-			switch (a) {
+			switch (i) {
 			case 0:
 				line = Position[0][0] + Position[0][1] + Position[0][2];
 				break;
@@ -101,10 +136,10 @@ public class Board {
 			else if (line.equals("OOO"))
 				result = "O win!";
 		}
-		for (int a = 0; a < 9; a++) {
-			if (Arrays.asList(Position).contains(String.valueOf(a + 1))) {
+		for (int i = 0; i < 9; i++) {
+			if (Arrays.asList(Position).contains(String.valueOf(i + 1))) {
 				break;
-			} else if (a == 8)
+			} else if (i == 8)
 				result= "draw";
 		}
 
