@@ -9,8 +9,8 @@ public class TicTacToe {
 		Controller c = new Controller();
 		Scanner s = new Scanner(System.in);
 		for(int i=0; i<2; i++) {
-		name = s.next();
 		System.out.println("Player "+ i +" Please Enter your name: ");
+		name = s.next();
 		}
 		c.getBoard();
 		c.updateBoard();
