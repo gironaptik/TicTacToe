@@ -1,42 +1,35 @@
-import java.util.Map;
+import java.util.HashMap;
 
 public class Controller {
 
-	private Map<Integer,Player> playerMap; 
-	private Board b = new Board();
-	private Player currentPlayer;
+	private HashMap<Integer,Player> playerMap= new HashMap<Integer,Player>();
+	//private Board b = new Board();
 	private int key=0;
 	
 	
 	public Controller() {
 	}
-	
-	
-	public Controller(Map<Integer, Player> playerMap, Board b, Player currentPlayer, int key) {
-		this.playerMap = playerMap;
-		this.b = b;
-		this.currentPlayer = currentPlayer;
-		this.key = key;
+
+	public void addToMap(int k, Player p) {
+		playerMap.put(k, p);
+		
 	}
-
-
-	public Player swapPlayer(){
+	public int getKey() {
+		return key;
+	}
+	public String nameFromMap(int k) {
+		return playerMap.get(k).getName();
+	}
+	public String swapPlayer(){
+		String sign;
 		if (key==0)
 			this.key=1;
 		else
 			this.key=0;
-		currentPlayer=playerMap.get(key);
-		return currentPlayer;
+		sign=playerMap.get(key).getSign();
+		return sign;
 	}
 	
-	public void getBoard() {
-		b.clearBoard();
-		
-	}
-	
-	public void updateBoard() {
-		b.checkAndPlayMove();
-	}
 	
 	
 }

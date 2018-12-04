@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 public class Player {
 
@@ -10,6 +10,9 @@ public class Player {
 		super();
 		this.name = name;
 		this.sign = sign;
+	}
+	
+	public Player() {
 	}
 
 	public String getSign() {

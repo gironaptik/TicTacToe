@@ -9,14 +9,13 @@ public class Board {
 	private int ROW = 3;
 	private int COL = 3;
 	private String[][] Position = new String[ROW][COL];
-	private Controller c;
 	private String currentSign = "X";
 	private String result;
+	private Controller c = new Controller();
 
-	public Board(String[][] position, Controller c) {
+	public Board(String[][] position) {
 		super();
 		Position = position;
-		this.c = c;
 	}
 
 	public Board() {
@@ -37,7 +36,7 @@ public class Board {
 			System.out.println();
 		}
 	}
-	
+
 	public void printBoard() {
 		for (int i = 0; i < ROW; i++) {
 			for (int j = 0; j < COL; j++) {
@@ -45,43 +44,47 @@ public class Board {
 			}
 			System.out.println();
 		}
-		
-	}
 
-	public Controller getC() {
-		return c;
 	}
 
 	public void setPosition(String[][] position) {
 		Position = position;
 	}
-
-	public void setC(Controller c) {
-		this.c = c;
+	
+	public void initPlayers() {
+		String name;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Player 1, Please Enter your name: ");
+		name = s.next();
+		Player p1 = new Player(name, "X");
+		this.c.addToMap(0, p1);
+		System.out.println("Player 2, Please Enter your name: ");
+		name = s.next();
+		Player p2 = new Player(name, "O");
+		this.c.addToMap(1, p2);
 	}
 
 	public void checkAndPlayMove() {
 		int choice;
+		Scanner k = new Scanner(System.in);
+		while(result == null) {
 		System.out.println("Please enter Your Move: ");
-		Scanner s = new Scanner(System.in);
-		choice = s.nextInt();
+		choice = k.nextInt();
 		convert(choice);
 
 		while (Position[currentRow][currentCol].equals("X") || Position[currentRow][currentCol].equals("O")) {
-
-			System.out.println("Please enter new Position: ");
-			choice = s.nextInt();
+			System.out.println("Wrong Position, Please enter new Position: ");
+			choice = k.nextInt();
 			convert(choice);
 		}
 
 		Position[currentRow][currentCol] = currentSign;
 		printBoard();
 		result = checkResult();
-		if (result == null)
-			this.currentSign = c.swapPlayer().getSign();
-		else
-			System.out.println(result);
-		s.close();
+		currentSign = c.swapPlayer();
+		}
+		System.out.println(result);
+		k.close();
 	}
 
 	private void convert(int choice) {
@@ -158,19 +161,19 @@ public class Board {
 
 			}
 			if (line.equals("XXX"))
-				result = "X win!";
+				result = "X win! Congratulations " + c.nameFromMap(c.getKey());
 			else if (line.equals("OOO"))
-				result = "O win!";
+				result = "O win! Congratulations " + c.nameFromMap(c.getKey());
 		}
-		
+
 		for (int i = 0; i < 9; i++) {
-			
+
 			List<String> list = new ArrayList<String>();
 			for (String[] array : Position) {
-			    list.addAll(Arrays.asList(array));      
+				list.addAll(Arrays.asList(array));
 			}
-			
-			if (list.contains(String.valueOf(i+1))) {
+
+			if (list.contains(String.valueOf(i + 1))) {
 				break;
 			} else if (i == 8)
 				result = "draw";
