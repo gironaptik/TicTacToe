@@ -36,6 +36,12 @@ public class Board {
 			System.out.println();
 		}
 	}
+	
+	public void reset() {
+		initPlayers();
+		clearBoard();
+		checkAndPlayMove();	
+	}
 
 	public void printBoard() {
 		for (int i = 0; i < ROW; i++) {
@@ -56,10 +62,12 @@ public class Board {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Player 1, Please Enter your name: ");
 		name = s.next();
+		if(name.equals("0")) reset();
 		Player p1 = new Player(name, "X");
 		this.c.addToMap(0, p1);
 		System.out.println("Player 2, Please Enter your name: ");
 		name = s.next();
+		if(name.equals("0")) reset();
 		Player p2 = new Player(name, "O");
 		this.c.addToMap(1, p2);
 	}
@@ -70,11 +78,14 @@ public class Board {
 		while(result == null) {
 		System.out.println("Please enter Your Move: ");
 		choice = k.nextInt();
+		if(choice == 0) reset();
+
 		convert(choice);
 
 		while (Position[currentRow][currentCol].equals("X") || Position[currentRow][currentCol].equals("O")) {
 			System.out.println("Wrong Position, Please enter new Position: ");
 			choice = k.nextInt();
+			if(choice == 0) reset();
 			convert(choice);
 		}
 
