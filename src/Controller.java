@@ -3,7 +3,6 @@ import java.util.HashMap;
 public class Controller {
 
 	private HashMap<Integer,Player> playerMap= new HashMap<Integer,Player>();
-	//private Board b = new Board();
 	private int key=0;
 	
 	
